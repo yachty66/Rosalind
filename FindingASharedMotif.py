@@ -1,32 +1,17 @@
 """
-finding longest string
-read all the strings from the lines into a list 
-get all substrings of current string and add this substring to a list 
+given is sequence of dna strings
+find biggest common string 
+
+take first char from first elem and check if this char appears in all other lists
+if yes add to list common strings and repeat process with char+nextcharsacter
+if no go to next char and repeat process 
+if done with string go to next elem and repeat till no elements 
 
 
-read lines where every line is an item in a list
-create two lists
-iterate over list and get every substring from an elem and add them to a list if done add this list to an list
-iterate over last created list twice and 
+bilden von allen substrings is to calc intense. 
 
-ich muss einen string aus einer liste nehmen und schauen ob der string in den darauffolgenden listen vorkommt 
-wenn ja kann ich den string speichern 
-dafuer muss ich jedes strng durch gehen und checken ob der curr string in diesem vorkommt 
-dafuer kann ich eine helper funktion bauen - diese bekommt immer eine liste welche verschiedene str enthaelt und returnt dann truye oder false
-dann kann ich durch alle strings itern und mir zurueck geben lassene 
-
-helper nimmt curr string und curr list und return bool 
-wenn bool false gehe direk zum  nachsten elem
-wenn elem durch fuege elem zu commonlist
-
-
-
-liste mit strings
-nehm erstes elem und ersten char davon
-gehe zu zweiten elem in liste und pruefe ob char vorkommt 
-wenn ja gehe liste weiter
-wenn char in jeder liste vorkommmt fuege char in eine liste mit commonstrings ein und gehe zurueck zu erstem elem und diesmal nehme den char + den naechsten 
-wenn der char einmal nicht vorkommmen sollte gehe zurueck zu erster liste und nehme naechsten charact
+actually i just need to create substrings of one string 
+check this time how long it does take to do that
 """
 def read():
     currStr=""
@@ -46,36 +31,48 @@ def read():
         listWithOrderedReads = listWithOrderedReads[1:]
     return listWithOrderedReads
 
-def checkIfStringAppears(s, l):
-    #wenn s min einmal in einem string vorkommt true else false
-    counter = 0 
-    for i in l:
-        if s in i:
-            counter += 1
-    if counter > 0:
-        return True
-    else:
-        return False
-
-def out():
-    print(read())
-    currList=[]
-    check = True
-    finalCheck = True 
-    allList=[]
-    listCommonSubstrings=[]
+def createSubStrings():
+    currStr = []
+    allStr =[]
     for i in read():
         for j in range(len(i)):
-            currList.append(i[:j+1])
-        allList.append(currList)
-        currList=[]
-    for i in allList:
-        print(allList)
+            for k in range(len(i)):
+                currStr.append(i[:k+1])
+            i = i[1:]
+        allStr.append(currStr)
+        print(currStr)
+        currStr = []
+    return allStr
+
+def check(str, l):
+    if l.count(str) == 0:
+        return False
+    else:
+        return True
+
+def out():
+    '''
+    commonStr l
+    iter list
+    iter list
+    all function mit last elem 
+    if all true add last elem to commonstr 
+    return longest elem  
+
+    iter over list 
+    create methods which takes j and k 
+    in method check if j is in k and return  bool
+    for all k with j 
+    if all is true add to commonstrings
+    return max frpom cs
+    '''
+    commonStr = []
+    for i in createSubStrings():
         for j in i:
-            for k in allList:
-                print("k")
-       
+            if all([check(j, l) == True for l in createSubStrings()]):
+                commonStr.append(j)
+    return max(commonStr)
 
-    print(listCommonSubstrings)
-
+            
+            
 print(out())
