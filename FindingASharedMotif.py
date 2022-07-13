@@ -32,7 +32,7 @@ def read():
     return listWithOrderedReads
 
 def createSubStrings():
-    currStr = []
+    '''currStr = []
     allStr =[]
     for i in read():
         for j in range(len(i)):
@@ -42,7 +42,26 @@ def createSubStrings():
         allStr.append(currStr)
         print(currStr)
         currStr = []
+    #return allStr'''
+    currStr = []
+    allStr =[]
+    var = read()[0]
+    change = read()[0]
+    counter = 0
+    for j in range(len(var)):
+        for k in range(len(var)):
+            currStr.append(change[:k+1])
+        change = change[1:]
+        counter += 1
+        if counter == 10:
+            break
+    allStr.append(currStr)
+    currStr = []
     return allStr
+
+#print(createSubStrings())
+
+
 
 def check(str, l):
     if l.count(str) == 0:
