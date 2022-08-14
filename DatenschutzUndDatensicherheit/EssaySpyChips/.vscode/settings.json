@@ -1,0 +1,9 @@
+{
+  "[python]": {
+    "editor.defaultFormatter": null
+  },
+  "editor.defaultFormatter": "ms-python.vscode-pylance",
+  "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
+}
